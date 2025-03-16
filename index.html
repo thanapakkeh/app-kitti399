@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>เข้าสู่ระบบ</title>
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      width: 90%;
+      max-width: 400px;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>เข้าสู่ระบบลูกบ้าน</h2>
+    <input type="text" id="houseNumber" placeholder="บ้านเลขที่ เช่น 399/269" />
+    <input type="password" id="password" placeholder="รหัสผ่าน เช่น 123456" />
+    <button onclick="login()">เข้าสู่ระบบ</button>
+    <p class="error" id="errorMsg"></p>
+  </div>
+
+  <script>
+    const users = {
+      "399/269": "123456",
+      "399/1": "123456"
+    };
+
+    function login() {
+      const house = document.getElementById("houseNumber").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const error = document.getElementById("errorMsg");
+
+      if (users[house] && users[house] === pass) {
+        sessionStorage.setItem("user", house);
+        window.location.href = "home.html";
+      } else {
+        error.textContent = "บ้านเลขที่หรือรหัสผ่านไม่ถูกต้อง";
+      }
+    }
+  </script>
+</body>
+</html>
