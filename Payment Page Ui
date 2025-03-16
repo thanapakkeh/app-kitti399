@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชำระค่าส่วนกลาง</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #fff;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    .container img {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    h2 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .account-number {
+      font-size: 24px;
+      color: #d32f2f;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .copy-btn {
+      background-color: #4285f4;
+      color: white;
+    }
+    .copy-btn:hover {
+      background-color: #3367d6;
+    }
+    .line-btn {
+      background-color: #00b900;
+      color: white;
+    }
+    .line-btn:hover {
+      background-color: #009e00;
+    }
+    .back-btn {
+      background-color: #e53935;
+      color: white;
+    }
+    .back-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="770282.jpg" alt="รูปบัญชี่">
+    <h2>เลขบัญชี</h2>
+    <div class="account-number">6100003754</div>
+
+    <button class="copy-btn" onclick="copyAccount()">📄 คัดลอกเลขบัญชี่</button>
+
+    <button class="line-btn" onclick="window.open('https://line.me/ti/g2/ZDauyxRug_VVvy_dd5uQyG8vZTed7Ix3qrhb6A', '_blank')">📤 ส่งสลิปผ่าน LINE</button>
+
+    <button class="back-btn" onclick="window.location.href='home.html'">🔙 กลับ</button>
+  </div>
+
+  <script>
+    function copyAccount() {
+      navigator.clipboard.writeText("6100003754")
+        .then(() => alert("คัดลอกเลขบัญชี่แล้ว"))
+        .catch(err => alert("Copy failed: " + err));
+    }
+  </script>
+</body>
+</html>
