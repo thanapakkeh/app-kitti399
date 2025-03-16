@@ -1,101 +1,70 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>ข้อมูลบ้านของคุณ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข้อมูลบ้านของคุณ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Sarabun', sans-serif;
-      background: #f9fafb;
-      padding: 2rem;
+      font-family: 'Noto Sans Thai', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
     }
     .card {
-      background: #ffffff;
-      padding: 2rem;
-      max-width: 500px;
-      margin: auto;
-      border-radius: 1rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
     }
     h2 {
-      margin-top: 0;
-      color: #333;
+      margin-bottom: 16px;
     }
     .info {
-      margin-bottom: 1rem;
-      font-size: 1rem;
+      text-align: left;
+      margin-bottom: 16px;
     }
-    .info strong {
-      color: #111827;
+    .info p {
+      margin: 8px 0;
     }
-    button, a button {
+    .btn {
+      padding: 12px;
       width: 100%;
-      padding: 0.8rem;
-      font-size: 1rem;
-      margin-top: 1rem;
-      border-radius: 0.5rem;
       border: none;
+      border-radius: 8px;
+      margin-top: 12px;
+      font-size: 16px;
       cursor: pointer;
     }
-    .copy-btn {
-      background-color: #3b82f6;
-      color: white;
-    }
-    .logout-btn {
-      background-color: #ef4444;
-      color: white;
-    }
-    .line-btn {
-      background-color: #06c755;
-      color: white;
-    }
+    .btn-copy { background-color: #4285F4; color: white; }
+    .btn-line { background-color: #00C300; color: white; }
+    .btn-logout { background-color: #E53935; color: white; }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>🏠 ข้อมูลบ้านของคุณ</h2>
-    <div class="info"><strong>บ้านเลขที่:</strong> <span id="houseNumber">-</span></div>
-    <div class="info"><strong>ช่วงค้างชำระ:</strong> <span id="billingPeriod">-</span></div>
-    <div class="info"><strong>ยอดค้างชำระ:</strong> <span id="amountDue">-</span> บาท</div>
-    <div class="info"><strong>อัปเดตล่าสุด:</strong> <span id="lastUpdate">-</span></div>
-    <hr>
-    <div class="info"><strong>บัญชีธนาคาร:</strong> 6100003754</div>
-    <div class="info"><strong>เบอร์โทร:</strong> 093-7781000</div>
-    <button class="copy-btn" onclick="copyAccount()">📋 คัดลอกเลขบัญชี</button>
-    <a href="https://line.me/ti/g2/ZDauyxRug_VVvy_dd5uQyG8vZTed7Ix3qrhb6A?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank">
-      <button class="line-btn">📱 ติดต่อเจ้าหน้าที่ผ่าน LINE</button>
+    <div class="info">
+      <p><strong>บ้านเลขที่:</strong> 399/1</p>
+      <p><strong>ช่วงค้างชำระ:</strong> มี.ค. 68</p>
+      <p><strong>ยอดค้างชำระ:</strong> 350 บาท</p>
+      <p><strong>อัปเดตล่าสุด:</strong> 28 ก.พ. 68</p>
+      <hr>
+      <p><strong>บัญชีธนาคาร:</strong> 6100003754</p>
+      <p><strong>เบอร์โทร:</strong> 093-7781000</p>
+    </div>
+    <button class="btn btn-copy" onclick="navigator.clipboard.writeText('6100003754')">📋 คัดลอกเลขบัญชี</button>
+    <a href="https://line.me/ti/g2/ZDauyxRug_VVvy_dd5uQyG8vZTed7Ix3qrhb6A" target="_blank">
+      <button class="btn btn-line">💬 ติดต่อเจ้าหน้าที่ผ่าน LINE</button>
     </a>
-    <button class="logout-btn" onclick="logout()">🔓 ออกจากระบบ</button>
+    <button class="btn btn-logout" onclick="alert('ออกจากระบบ')">🔒 ออกจากระบบ</button>
   </div>
-
-  <script src="data.js"></script>
-  <script>
-    const user = sessionStorage.getItem("user");
-    document.getElementById("houseNumber").textContent = user || "-";
-    if (user && houseData[user]) {
-      const data = houseData[user];
-      document.getElementById("billingPeriod").textContent = data["ช่วงค้างชำระ"];
-      document.getElementById("amountDue").textContent = data["ยอดรวมค้างชำระ"];
-      document.getElementById("lastUpdate").textContent = data["อัปเดตล่าสุด"];
-    } else {
-      document.getElementById("billingPeriod").textContent = "ไม่มีข้อมูล";
-      document.getElementById("amountDue").textContent = "-";
-      document.getElementById("lastUpdate").textContent = "-";
-    }
-
-    function logout() {
-      sessionStorage.clear();
-      window.location.href = "index.html";
-    }
-
-    function copyAccount() {
-      navigator.clipboard.writeText("6100003754").then(() => {
-        alert("คัดลอกเลขบัญชีแล้ว");
-      });
-    }
-  </script>
 </body>
 </html>
